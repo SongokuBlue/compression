@@ -1,0 +1,3 @@
+/mnt/c/second_year/advance/learn/build/CMakeFiles/learn.dir
+/mnt/c/second_year/advance/learn/build/CMakeFiles/edit_cache.dir
+/mnt/c/second_year/advance/learn/build/CMakeFiles/rebuild_cache.dir

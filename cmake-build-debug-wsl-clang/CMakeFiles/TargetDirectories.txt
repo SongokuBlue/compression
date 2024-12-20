@@ -1,0 +1,3 @@
+/mnt/c/second_year/advance/learn/cmake-build-debug-wsl-clang/CMakeFiles/learn.dir
+/mnt/c/second_year/advance/learn/cmake-build-debug-wsl-clang/CMakeFiles/edit_cache.dir
+/mnt/c/second_year/advance/learn/cmake-build-debug-wsl-clang/CMakeFiles/rebuild_cache.dir
