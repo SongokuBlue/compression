@@ -81,12 +81,12 @@ clean: CMakeFiles/learn.dir/clean
 CMakeFiles/learn.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/second_year/advance/learn/cmake-build-debug-wsl-gcc/CMakeFiles --progress-num=1,2,3 "Built target learn"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/second_year/advance/learn/cmake-build-debug-wsl-gcc/CMakeFiles --progress-num=1,2,3,4 "Built target learn"
 .PHONY : CMakeFiles/learn.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/learn.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/second_year/advance/learn/cmake-build-debug-wsl-gcc/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/second_year/advance/learn/cmake-build-debug-wsl-gcc/CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/learn.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/second_year/advance/learn/cmake-build-debug-wsl-gcc/CMakeFiles 0
 .PHONY : CMakeFiles/learn.dir/rule

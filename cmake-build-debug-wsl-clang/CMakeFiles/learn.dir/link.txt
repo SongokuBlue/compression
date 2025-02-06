@@ -1,1 +1,1 @@
-/usr/bin/clang++ -g CMakeFiles/learn.dir/main.cpp.o CMakeFiles/learn.dir/src/huffman.cpp.o -o learn 
+/usr/bin/clang++ -g CMakeFiles/learn.dir/main.cpp.o CMakeFiles/learn.dir/src/huffman.cpp.o CMakeFiles/learn.dir/src/huffmanimage.cpp.o -o learn 

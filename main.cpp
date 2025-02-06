@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "include/huffman.h"
-
+#include "include/huffman_image.h"
 int main(int argc, char* argv[]) {
     if (argc < 2) { // Kiểm tra xem có đủ tham số không
         std::cerr << "Usage: huffman <input_file1> [<input_file2> ...]\n";
@@ -16,10 +16,10 @@ int main(int argc, char* argv[]) {
         std::cout << "Processing file: " << file_name << "\n";
 
         // Gọi hàm nén
-        const std::string output = "encode.txt";
-        MinHeapNode* root = nullptr; // Khởi tạo con trỏ root
-        compressFile(file_name, outputFileName, root);  // Truyền tham chiếu vào đây
-        decompressFile(outputFileName, output, root);  // Sử dụng con trỏ root đã cập nhật
+        const std::string output = "encode.bmp";
+        MinHeapNodeImage* root = nullptr; // Khởi tạo con trỏ root
+        compressImage(file_name, outputFileName, root);  // Truyền tham chiếu vào đây
+        decompressImage(outputFileName, output, root);  // Sử dụng con trỏ root đã cập nhật
     }
     return EXIT_SUCCESS;
 }

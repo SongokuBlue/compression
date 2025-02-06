@@ -87,10 +87,16 @@
 		<Unit filename="/mnt/c/second_year/advance/learn/include/huffman.h">
 			<Option target="learn"/>
 		</Unit>
+		<Unit filename="/mnt/c/second_year/advance/learn/include/huffman_image.h">
+			<Option target="learn"/>
+		</Unit>
 		<Unit filename="/mnt/c/second_year/advance/learn/main.cpp">
 			<Option target="learn"/>
 		</Unit>
 		<Unit filename="/mnt/c/second_year/advance/learn/src/huffman.cpp">
+			<Option target="learn"/>
+		</Unit>
+		<Unit filename="/mnt/c/second_year/advance/learn/src/huffmanimage.cpp">
 			<Option target="learn"/>
 		</Unit>
 		<Unit filename="/mnt/c/second_year/advance/learn/CMakeLists.txt">

@@ -177,6 +177,30 @@ src/huffman.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/src/huffman.cpp.s
 .PHONY : src/huffman.cpp.s
 
+src/huffmanimage.o: src/huffmanimage.cpp.o
+.PHONY : src/huffmanimage.o
+
+# target to build an object file
+src/huffmanimage.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/src/huffmanimage.cpp.o
+.PHONY : src/huffmanimage.cpp.o
+
+src/huffmanimage.i: src/huffmanimage.cpp.i
+.PHONY : src/huffmanimage.i
+
+# target to preprocess a source file
+src/huffmanimage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/src/huffmanimage.cpp.i
+.PHONY : src/huffmanimage.cpp.i
+
+src/huffmanimage.s: src/huffmanimage.cpp.s
+.PHONY : src/huffmanimage.s
+
+# target to generate assembly for a file
+src/huffmanimage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/src/huffmanimage.cpp.s
+.PHONY : src/huffmanimage.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -192,6 +216,9 @@ help:
 	@echo "... src/huffman.o"
 	@echo "... src/huffman.i"
 	@echo "... src/huffman.s"
+	@echo "... src/huffmanimage.o"
+	@echo "... src/huffmanimage.i"
+	@echo "... src/huffmanimage.s"
 .PHONY : help
 
 

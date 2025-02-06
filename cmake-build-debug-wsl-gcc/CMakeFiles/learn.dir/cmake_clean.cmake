@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/learn.dir/main.cpp.o.d"
   "CMakeFiles/learn.dir/src/huffman.cpp.o"
   "CMakeFiles/learn.dir/src/huffman.cpp.o.d"
+  "CMakeFiles/learn.dir/src/huffmanimage.cpp.o"
+  "CMakeFiles/learn.dir/src/huffmanimage.cpp.o.d"
   "learn"
   "learn.pdb"
 )
