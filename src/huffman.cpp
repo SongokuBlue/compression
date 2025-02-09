@@ -98,7 +98,7 @@ void compressFile(const string &inputFileName, const string &outputFileName,MinH
     std::string inputData((std::istreambuf_iterator<char>(inputFile)), std::istreambuf_iterator<char>());
     inputFile.close();
 
-    // Tính tần suất ký tự
+    // calculate character frequency
     std::unordered_map<char, int> freqMap;
     for (char ch : inputData) {
         freqMap[ch]++;

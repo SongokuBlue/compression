@@ -23,7 +23,6 @@ struct compare {
     bool operator()(MinHeapNode* l, MinHeapNode* r) {
         return l->freq > r->freq;
     }
-
 };
 
 // Function declarations

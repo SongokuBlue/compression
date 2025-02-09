@@ -4,13 +4,13 @@
 #include "huffmanImage.h"
 
 
-// Hàm tách phần tên file không có phần mở rộng
+
 std::string getFileNameWithoutExtension(const std::string& filePath) {
-    size_t lastDot = filePath.find_last_of(".");      // Tìm dấu `.` cuối cùng
+    size_t lastDot = filePath.find_last_of(".");
     return (lastDot == std::string::npos) ? filePath : filePath.substr(0, lastDot);
 }
 std::string getFileNameWithExtension(const std::string& filePath) {
-    size_t lastDot = filePath.find_last_of(".");      // Tìm dấu `.` cuối cùng
+    size_t lastDot = filePath.find_last_of(".");
     return (lastDot == std::string::npos) ? filePath : filePath.substr( lastDot);
 }
 int main(int argc, char* argv[]) {
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]) {
         std::string baseName = getFileNameWithoutExtension(file_name);
         std::string LastName = getFileNameWithExtension(file_name);
 
-        // Kiểm tra file ảnh BMP
+        // checking file type before proccess
         if (LastName == ".bmp") {
             // Tạo tên file output (thay .bmp bằng .huff)
             std::string outputFileName = baseName + ".huff";
@@ -32,19 +32,19 @@ int main(int argc, char* argv[]) {
 
             std::cout << "Compressing: " << file_name << " -> " << outputFileName << std::endl;
 
-            // Khởi tạo dữ liệu hình ảnh
+
             ImageData data;
             std::unordered_map<int, std::string> huffmanMap;
             readBMP(file_name.c_str(), &data);
 
-            // Tính histogram
+
             computeHistogram(&data, data.histogram);
 
-            // Xây dựng cây Huffman
+
             HuffmanTree tree = {0};
             buildHuffmanTree(&data, &tree, huffmanMap);
 
-            // Mã hóa và lưu file
+
             encodeImage(outputFileName.c_str(), &data, huffmanMap);
             std::unordered_map<std::string, int> reverseHuffmanMap;
             for (const auto& pair : huffmanMap) {
@@ -52,18 +52,15 @@ int main(int argc, char* argv[]) {
             }
             decodeImage(outputFileName.c_str(), Image.c_str(), &data, reverseHuffmanMap);
         }
-        else if (LastName == ".txt") {  // Kiểm tra file TXT
+        else {
             std::string outputFileName = baseName + ".huff";
             std::string decodedFileName = baseName + "_decoded" + LastName;
             std::cout << "Processing text file: " << file_name << "\n";
 
-            // Nén và giải nén file văn bản
+
             MinHeapNode* root = nullptr;
             compressFile(file_name, outputFileName, root);
             decompressFile(outputFileName, decodedFileName, root);
-        }
-        else {
-            std::cout << "Unsupported file format: " << file_name << "\n";
         }
     }
 

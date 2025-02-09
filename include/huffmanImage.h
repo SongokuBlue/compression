@@ -3,7 +3,7 @@
 
 #define BMP_HEADER_SIZE 54
 #define MAX_GRAY_VALUE 256
-#define MAX_CODE_LEN 32
+
 #define COLOR_TABLE_SIZE 1024
 #include "string"
 #include "unordered_map"
@@ -19,14 +19,13 @@ struct huffcode {
 };
 
 struct ImageData {
-    unsigned char **image;  // S?a thành c?p phát ??ng
+    unsigned char **image;
     int width, height;
     float histogram[MAX_GRAY_VALUE];
 };
 
 struct HuffmanTree {
-    struct pixfreq *nodes[MAX_GRAY_VALUE * 2]; // S?a thành con tr?
-    struct huffcode huffcodes[MAX_GRAY_VALUE];
+    struct pixfreq *nodes[MAX_GRAY_VALUE * 2];
     int totalNodes;
 };
 struct ComparePixFreq {
@@ -34,7 +33,7 @@ struct ComparePixFreq {
         return a->freq > b->freq;
     }
 };
-// Các hàm
+
 void readBMP(const char *filename, struct ImageData *data);
 void computeHistogram(struct ImageData *data, float hist[MAX_GRAY_VALUE]);
 void buildHuffmanTree(struct ImageData *data, struct HuffmanTree *tree,std::unordered_map<int, std::string> &huffmanMap);
