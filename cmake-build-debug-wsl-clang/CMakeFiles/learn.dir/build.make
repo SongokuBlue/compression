@@ -97,32 +97,32 @@ CMakeFiles/learn.dir/src/huffman.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/learn.dir/src/huffman.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/second_year/advance/learn/src/huffman.cpp -o CMakeFiles/learn.dir/src/huffman.cpp.s
 
-CMakeFiles/learn.dir/src/huffmanimage.cpp.o: CMakeFiles/learn.dir/flags.make
-CMakeFiles/learn.dir/src/huffmanimage.cpp.o: ../src/huffmanimage.cpp
-CMakeFiles/learn.dir/src/huffmanimage.cpp.o: CMakeFiles/learn.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/second_year/advance/learn/cmake-build-debug-wsl-clang/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/learn.dir/src/huffmanimage.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/learn.dir/src/huffmanimage.cpp.o -MF CMakeFiles/learn.dir/src/huffmanimage.cpp.o.d -o CMakeFiles/learn.dir/src/huffmanimage.cpp.o -c /mnt/c/second_year/advance/learn/src/huffmanimage.cpp
+CMakeFiles/learn.dir/src/huffmanImage.cpp.o: CMakeFiles/learn.dir/flags.make
+CMakeFiles/learn.dir/src/huffmanImage.cpp.o: ../src/huffmanImage.cpp
+CMakeFiles/learn.dir/src/huffmanImage.cpp.o: CMakeFiles/learn.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/second_year/advance/learn/cmake-build-debug-wsl-clang/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/learn.dir/src/huffmanImage.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/learn.dir/src/huffmanImage.cpp.o -MF CMakeFiles/learn.dir/src/huffmanImage.cpp.o.d -o CMakeFiles/learn.dir/src/huffmanImage.cpp.o -c /mnt/c/second_year/advance/learn/src/huffmanImage.cpp
 
-CMakeFiles/learn.dir/src/huffmanimage.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/learn.dir/src/huffmanimage.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/second_year/advance/learn/src/huffmanimage.cpp > CMakeFiles/learn.dir/src/huffmanimage.cpp.i
+CMakeFiles/learn.dir/src/huffmanImage.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/learn.dir/src/huffmanImage.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/second_year/advance/learn/src/huffmanImage.cpp > CMakeFiles/learn.dir/src/huffmanImage.cpp.i
 
-CMakeFiles/learn.dir/src/huffmanimage.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/learn.dir/src/huffmanimage.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/second_year/advance/learn/src/huffmanimage.cpp -o CMakeFiles/learn.dir/src/huffmanimage.cpp.s
+CMakeFiles/learn.dir/src/huffmanImage.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/learn.dir/src/huffmanImage.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/second_year/advance/learn/src/huffmanImage.cpp -o CMakeFiles/learn.dir/src/huffmanImage.cpp.s
 
 # Object files for target learn
 learn_OBJECTS = \
 "CMakeFiles/learn.dir/main.cpp.o" \
 "CMakeFiles/learn.dir/src/huffman.cpp.o" \
-"CMakeFiles/learn.dir/src/huffmanimage.cpp.o"
+"CMakeFiles/learn.dir/src/huffmanImage.cpp.o"
 
 # External object files for target learn
 learn_EXTERNAL_OBJECTS =
 
 learn: CMakeFiles/learn.dir/main.cpp.o
 learn: CMakeFiles/learn.dir/src/huffman.cpp.o
-learn: CMakeFiles/learn.dir/src/huffmanimage.cpp.o
+learn: CMakeFiles/learn.dir/src/huffmanImage.cpp.o
 learn: CMakeFiles/learn.dir/build.make
 learn: CMakeFiles/learn.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/second_year/advance/learn/cmake-build-debug-wsl-clang/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable learn"

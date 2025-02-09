@@ -168,4 +168,4 @@ CMakeFiles/learn.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/12/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/12/bits/c++io.h \
  /usr/include/c++/12/bits/fstream.tcc /usr/include/c++/12/bitset \
- /mnt/c/second_year/advance/learn/include/huffman_image.h
+ /mnt/c/second_year/advance/learn/include/huffmanImage.h

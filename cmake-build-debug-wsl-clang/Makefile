@@ -177,29 +177,29 @@ src/huffman.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/src/huffman.cpp.s
 .PHONY : src/huffman.cpp.s
 
-src/huffmanimage.o: src/huffmanimage.cpp.o
-.PHONY : src/huffmanimage.o
+src/huffmanImage.o: src/huffmanImage.cpp.o
+.PHONY : src/huffmanImage.o
 
 # target to build an object file
-src/huffmanimage.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/src/huffmanimage.cpp.o
-.PHONY : src/huffmanimage.cpp.o
+src/huffmanImage.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/src/huffmanImage.cpp.o
+.PHONY : src/huffmanImage.cpp.o
 
-src/huffmanimage.i: src/huffmanimage.cpp.i
-.PHONY : src/huffmanimage.i
+src/huffmanImage.i: src/huffmanImage.cpp.i
+.PHONY : src/huffmanImage.i
 
 # target to preprocess a source file
-src/huffmanimage.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/src/huffmanimage.cpp.i
-.PHONY : src/huffmanimage.cpp.i
+src/huffmanImage.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/src/huffmanImage.cpp.i
+.PHONY : src/huffmanImage.cpp.i
 
-src/huffmanimage.s: src/huffmanimage.cpp.s
-.PHONY : src/huffmanimage.s
+src/huffmanImage.s: src/huffmanImage.cpp.s
+.PHONY : src/huffmanImage.s
 
 # target to generate assembly for a file
-src/huffmanimage.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/src/huffmanimage.cpp.s
-.PHONY : src/huffmanimage.cpp.s
+src/huffmanImage.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/learn.dir/build.make CMakeFiles/learn.dir/src/huffmanImage.cpp.s
+.PHONY : src/huffmanImage.cpp.s
 
 # Help Target
 help:
@@ -216,9 +216,9 @@ help:
 	@echo "... src/huffman.o"
 	@echo "... src/huffman.i"
 	@echo "... src/huffman.s"
-	@echo "... src/huffmanimage.o"
-	@echo "... src/huffmanimage.i"
-	@echo "... src/huffmanimage.s"
+	@echo "... src/huffmanImage.o"
+	@echo "... src/huffmanImage.i"
+	@echo "... src/huffmanImage.s"
 .PHONY : help
 
 

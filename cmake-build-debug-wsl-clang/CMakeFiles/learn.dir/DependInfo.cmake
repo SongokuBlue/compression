@@ -10,7 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/mnt/c/second_year/advance/learn/main.cpp" "CMakeFiles/learn.dir/main.cpp.o" "gcc" "CMakeFiles/learn.dir/main.cpp.o.d"
   "/mnt/c/second_year/advance/learn/src/huffman.cpp" "CMakeFiles/learn.dir/src/huffman.cpp.o" "gcc" "CMakeFiles/learn.dir/src/huffman.cpp.o.d"
-  "/mnt/c/second_year/advance/learn/src/huffmanimage.cpp" "CMakeFiles/learn.dir/src/huffmanimage.cpp.o" "gcc" "CMakeFiles/learn.dir/src/huffmanimage.cpp.o.d"
+  "/mnt/c/second_year/advance/learn/src/huffmanImage.cpp" "CMakeFiles/learn.dir/src/huffmanImage.cpp.o" "gcc" "CMakeFiles/learn.dir/src/huffmanImage.cpp.o.d"
   )
 
 # Targets to which this target links.

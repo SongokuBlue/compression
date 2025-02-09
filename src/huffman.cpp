@@ -6,23 +6,10 @@
 using namespace std;
 struct MinHeapNode* newNode(char data, unsigned freq) {
     struct MinHeapNode* temp = (struct MinHeapNode*)malloc(sizeof(struct MinHeapNode));
-    temp->left = temp->right = NULL;
-    temp->data = data;
-    temp->freq = freq;
     return temp;
 }
-//// Utility function to print Huffman codes
-//void printCodes(MinHeapNode* root, std::string str) {
-//    if (!root)
-//        return;
-//
-//    if (root->data != '$') {
-//        cout << root->data << ": " << str << endl;
-//    }
-//
-//    printCodes(root->left, str + "0");
-//    printCodes(root->right, str + "1");
-//}
+
+
 
 // Function to encode the input string using Huffman codes
 std::string encode(std::string input, const std::unordered_map<char, std::string>& huffmanCode) {
@@ -35,7 +22,6 @@ std::string encode(std::string input, const std::unordered_map<char, std::string
 void storeCodes(struct MinHeapNode* root, unordered_map<char, string>& huffmanCode, string str) {
     if (root == NULL)
         return;
-
 
     if (root->data != '$') {
         huffmanCode[root->data] = str;

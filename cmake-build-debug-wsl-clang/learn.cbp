@@ -87,7 +87,7 @@
 		<Unit filename="/mnt/c/second_year/advance/learn/include/huffman.h">
 			<Option target="learn"/>
 		</Unit>
-		<Unit filename="/mnt/c/second_year/advance/learn/include/huffman_image.h">
+		<Unit filename="/mnt/c/second_year/advance/learn/include/huffmanImage.h">
 			<Option target="learn"/>
 		</Unit>
 		<Unit filename="/mnt/c/second_year/advance/learn/main.cpp">
@@ -96,10 +96,16 @@
 		<Unit filename="/mnt/c/second_year/advance/learn/src/huffman.cpp">
 			<Option target="learn"/>
 		</Unit>
-		<Unit filename="/mnt/c/second_year/advance/learn/src/huffmanimage.cpp">
+		<Unit filename="/mnt/c/second_year/advance/learn/src/huffmanImage.cpp">
 			<Option target="learn"/>
 		</Unit>
+		<Unit filename="/mnt/c/second_year/advance/learn/10mb.json">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
 		<Unit filename="/mnt/c/second_year/advance/learn/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/mnt/c/second_year/advance/learn/Harry_Potter.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 		<Unit filename="/mnt/c/second_year/advance/learn/input.txt">
