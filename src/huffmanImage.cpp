@@ -144,6 +144,7 @@ void buildHuffmanTree(struct ImageData *data, struct HuffmanTree *tree,std::unor
         exit(1);
     }
     generateCodes(tree->nodes[0], "", huffmanMap);
+
 }
 
 
@@ -287,10 +288,10 @@ void encodeImage(const char *outputFile, struct ImageData *data, std::unordered_
 //    fclose(outFile);
 //}
 
-void decodeImage(const char *inputFile, const char *outputFile, struct ImageData *data, const std::unordered_map<int, std::string>& huffmanMap) {
+void decodeImage(const char *inputFile, const char *outputFile, struct ImageData *data, const std::unordered_map<std::string, int> &reverseHuffmanMap) {
     FILE *file = fopen(inputFile, "rb");
     if (!file) {
-        printf("Error: Cannot open file\n");
+        printf("Error: Cannot open input file\n");
         return;
     }
 
@@ -301,36 +302,97 @@ void decodeImage(const char *inputFile, const char *outputFile, struct ImageData
         return;
     }
 
-    // Đọc kích thước ảnh
-    fread(&data->width, sizeof(int), 1, file);
-    fread(&data->height, sizeof(int), 1, file);
+    // Đọc kích thước ảnh từ file nén
+    if (fread(&data->width, sizeof(int), 1, file) != 1 || fread(&data->height, sizeof(int), 1, file) != 1) {
+        printf("Error: Failed to read image dimensions\n");
+        fclose(file);
+        fclose(outFile);
+        return;
+    }
 
-    // Cấp phát bộ nhớ cho ảnh
-    data->image = new unsigned char*[data->height];
+    // Kiểm tra giá trị width và height hợp lệ
+    if (data->width <= 0 || data->height <= 0) {
+        printf("Error: Invalid image size (%d x %d)\n", data->width, data->height);
+        fclose(file);
+        fclose(outFile);
+        return;
+    }
+
+    // Cấp phát bộ nhớ cho dữ liệu ảnh
+    data->image = (unsigned char **)malloc(data->height * sizeof(unsigned char *));
+    if (data->image == NULL) {
+        printf("Error: Memory allocation failed for image rows\n");
+        fclose(file);
+        fclose(outFile);
+        return;
+    }
+
     for (int i = 0; i < data->height; ++i) {
-        data->image[i] = new unsigned char[data->width];
+        data->image[i] = (unsigned char *)malloc(data->width * sizeof(unsigned char));
+        if (data->image[i] == NULL) {
+            printf("Error: Memory allocation failed for image row %d\n", i);
+            fclose(file);
+            fclose(outFile);
+            return;
+        }
     }
 
-    // Tạo bảng mã Huffman ngược
-    std::unordered_map<std::string, int> reverseHuffmanMap;
-    for (const auto& pair : huffmanMap) {
-        reverseHuffmanMap[pair.second] = pair.first;
+    // Đọc số lượng phần tử của Huffman Map
+    int mapSize;
+    if (fread(&mapSize, sizeof(int), 1, file) != 1) {
+        printf("Error: Failed to read Huffman map size\n");
+        fclose(file);
+        fclose(outFile);
+        return;
     }
 
-    // Giải mã bitstream
+    // Đọc từng cặp {pixel_value, huffman_code} từ file nén
+    std::unordered_map<std::string, int> huffmanMap;
+    for (int i = 0; i < mapSize; ++i) {
+        int pixelValue;
+        int codeLength;
+        if (fread(&pixelValue, sizeof(int), 1, file) != 1 || fread(&codeLength, sizeof(int), 1, file) != 1) {
+            printf("Error: Failed to read Huffman map entry\n");
+            fclose(file);
+            fclose(outFile);
+            return;
+        }
+
+        char *code = (char *)malloc((codeLength + 1) * sizeof(char));
+        if (code == NULL) {
+            printf("Error: Memory allocation failed for Huffman code\n");
+            fclose(file);
+            fclose(outFile);
+            return;
+        }
+
+        if (fread(code, sizeof(char), codeLength, file) != codeLength) {
+            printf("Error: Failed to read Huffman code\n");
+            free(code);
+            fclose(file);
+            fclose(outFile);
+            return;
+        }
+
+        code[codeLength] = '\0'; // Kết thúc chuỗi
+        huffmanMap[code] = pixelValue;
+        free(code);
+    }
+
+    // Giải mã bitstream từ file nén
     unsigned char byte;
-    std::string currentBits = "";  // Chuỗi nhị phân hiện tại
+    std::string currentBits = "";
     int row = 0, col = 0;
 
     while (fread(&byte, sizeof(unsigned char), 1, file)) {
         for (int i = 7; i >= 0; --i) {
             bool bit = (byte >> i) & 1;
-            currentBits += std::to_string(bit);  // Thêm bit vào chuỗi
+            currentBits += (bit ? "1" : "0");
 
-            // Kiểm tra nếu chuỗi này có trong bảng mã ngược
-            if (reverseHuffmanMap.find(currentBits) != reverseHuffmanMap.end()) {
-                data->image[row][col] = reverseHuffmanMap[currentBits];  // Gán giá trị pixel
-                currentBits = "";  // Reset chuỗi nhị phân
+            // Nếu tìm thấy chuỗi mã Huffman khớp với currentBits
+            if (huffmanMap.find(currentBits) != huffmanMap.end()) {
+                data->image[row][col] = huffmanMap.at(currentBits);
+                currentBits = "";  // Reset chuỗi bit hiện tại
 
                 col++;
                 if (col == data->width) {
@@ -345,16 +407,54 @@ void decodeImage(const char *inputFile, const char *outputFile, struct ImageData
         }
     }
 
+    fclose(file);
+
     WRITE_OUTPUT:
-    // Ghi dữ liệu vào file BMP
-    fwrite(&data->width, sizeof(int), 1, outFile);
-    fwrite(&data->height, sizeof(int), 1, outFile);
-    printf("Decoded image width: %d, height: %d\n", data->width, data->height);
-    for (int i = 0; i < data->height; ++i) {
+    // Tạo header BMP
+    unsigned char bmpHeader[BMP_HEADER_SIZE] = {0};
+
+    // Điền header BMP
+    bmpHeader[0] = 'B';
+    bmpHeader[1] = 'M';
+
+    int rowSize = (data->width + 3) & ~3;  // Đảm bảo width là bội số của 4
+    int imageSize = rowSize * data->height;
+    int fileSize = BMP_HEADER_SIZE + COLOR_TABLE_SIZE + imageSize;
+    int offset = BMP_HEADER_SIZE + COLOR_TABLE_SIZE;
+    int colorCount = 256;  // 8-bit grayscale có 256 màu
+
+    // Ghi kích thước file và thông tin BMP vào header
+    memcpy(&bmpHeader[2], &fileSize, 4);
+    memcpy(&bmpHeader[10], &offset, 4);
+    memcpy(&bmpHeader[14], "\x28\x00\x00\x00", 4); // DIB Header Size (40 bytes)
+    memcpy(&bmpHeader[18], &data->width, 4);
+    memcpy(&bmpHeader[22], &data->height, 4);
+    memcpy(&bmpHeader[26], "\x01\x00", 2); // Planes = 1
+    memcpy(&bmpHeader[28], "\x08\x00", 2); // Bits per pixel = 8
+    memcpy(&bmpHeader[34], &imageSize, 4);
+    memcpy(&bmpHeader[46], &colorCount, 4);
+
+    fwrite(bmpHeader, sizeof(unsigned char), BMP_HEADER_SIZE, outFile);
+
+    unsigned char colorTable[COLOR_TABLE_SIZE];
+    for (int i = 0; i < 256; i++) {
+        colorTable[i * 4] = i;
+        colorTable[i * 4 + 1] = i;
+        colorTable[i * 4 + 2] = i;
+        colorTable[i * 4 + 3] = 0;
+    }
+    fwrite(colorTable, sizeof(unsigned char), COLOR_TABLE_SIZE, outFile);
+
+    // Ghi dữ liệu pixel (thêm padding)
+    unsigned char paddingBytes[3] = {0, 0, 0};
+    int padding = rowSize - data->width;
+
+    for (int i = data->height - 1; i >= 0; --i) {
         fwrite(data->image[i], sizeof(unsigned char), data->width, outFile);
+        fwrite(paddingBytes, sizeof(unsigned char), padding, outFile);
     }
 
-    printf("Decoded image saved to %s\n", outputFile);
+    printf("✅ Decoded image saved to %s\n", outputFile);
+
     fclose(outFile);
 }
-
