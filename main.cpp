@@ -13,6 +13,15 @@ std::string getFileNameWithExtension(const std::string& filePath) {
     size_t lastDot = filePath.find_last_of(".");
     return (lastDot == std::string::npos) ? filePath : filePath.substr( lastDot);
 }
+long long getFileSize(const std::string& filePath) {
+    std::ifstream file(filePath, std::ios::binary | std::ios::ate);
+    if (file.is_open()) {
+        return file.tellg();  // return the file size
+    } else {
+        std::cerr << "Could not open file: " << filePath << std::endl;
+        return -1;
+    }
+}
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cout << "Usage: " << argv[0] << " <file1> <file2> ...\n";
@@ -51,6 +60,15 @@ int main(int argc, char* argv[]) {
                 reverseHuffmanMap[pair.second] = pair.first;
             }
             decodeImage(outputFileName.c_str(), Image.c_str(), &data, reverseHuffmanMap);
+            long long originalSize = getFileSize(file_name);
+            long long compressedSize = getFileSize(outputFileName);
+
+            if (originalSize != -1 && compressedSize != -1) {
+                std::cout << "Original file size: " << originalSize << " bytes\n";
+                std::cout << "Compressed file size: " << compressedSize << " bytes\n";
+                std::cout << "Compression ratio: "
+                          << static_cast<double>(originalSize) / compressedSize << "\n";
+            }
         }
         else {
             std::string outputFileName = baseName + ".huff";
@@ -61,7 +79,18 @@ int main(int argc, char* argv[]) {
             MinHeapNode* root = nullptr;
             compressFile(file_name, outputFileName, root);
             decompressFile(outputFileName, decodedFileName, root);
+            long long originalSize = getFileSize(file_name);
+            long long compressedSize = getFileSize(outputFileName);
+
+            if (originalSize != -1 && compressedSize != -1) {
+                std::cout << "Original file size: " << originalSize << " bytes\n";
+                std::cout << "Compressed file size: " << compressedSize << " bytes\n";
+                std::cout << "Compression ratio: "
+                          << static_cast<double>(originalSize) / compressedSize << "\n";
+
+            }
         }
+        printf("\n");
     }
 
     return 0;
