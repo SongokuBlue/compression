@@ -349,4 +349,7 @@ CMakeFiles/LZW.dir/main.cpp.o: \
  /usr/include/c++/12/coroutine /usr/include/c++/12/latch \
  /usr/include/c++/12/ranges /usr/include/c++/12/span \
  /usr/include/c++/12/source_location /usr/include/c++/12/syncstream \
- /usr/include/c++/12/version
+ /usr/include/c++/12/version \
+ /mnt/e/Project/Advance\ programming/Final_project/compression/LZW/GIF.h \
+ /mnt/e/Project/Advance\ programming/Final_project/compression/LZW/Text.h \
+ /mnt/e/Project/Advance\ programming/Final_project/compression/LZW/Video.h

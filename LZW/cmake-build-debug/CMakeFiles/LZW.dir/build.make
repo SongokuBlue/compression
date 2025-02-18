@@ -83,17 +83,65 @@ CMakeFiles/LZW.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LZW.dir/main.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/e/Project/Advance programming/Final_project/compression/LZW/main.cpp" -o CMakeFiles/LZW.dir/main.cpp.s
 
+CMakeFiles/LZW.dir/GIF.cpp.o: CMakeFiles/LZW.dir/flags.make
+CMakeFiles/LZW.dir/GIF.cpp.o: ../GIF.cpp
+CMakeFiles/LZW.dir/GIF.cpp.o: CMakeFiles/LZW.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/e/Project/Advance programming/Final_project/compression/LZW/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/LZW.dir/GIF.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LZW.dir/GIF.cpp.o -MF CMakeFiles/LZW.dir/GIF.cpp.o.d -o CMakeFiles/LZW.dir/GIF.cpp.o -c "/mnt/e/Project/Advance programming/Final_project/compression/LZW/GIF.cpp"
+
+CMakeFiles/LZW.dir/GIF.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LZW.dir/GIF.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/e/Project/Advance programming/Final_project/compression/LZW/GIF.cpp" > CMakeFiles/LZW.dir/GIF.cpp.i
+
+CMakeFiles/LZW.dir/GIF.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LZW.dir/GIF.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/e/Project/Advance programming/Final_project/compression/LZW/GIF.cpp" -o CMakeFiles/LZW.dir/GIF.cpp.s
+
+CMakeFiles/LZW.dir/Text.cpp.o: CMakeFiles/LZW.dir/flags.make
+CMakeFiles/LZW.dir/Text.cpp.o: ../Text.cpp
+CMakeFiles/LZW.dir/Text.cpp.o: CMakeFiles/LZW.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/e/Project/Advance programming/Final_project/compression/LZW/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/LZW.dir/Text.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LZW.dir/Text.cpp.o -MF CMakeFiles/LZW.dir/Text.cpp.o.d -o CMakeFiles/LZW.dir/Text.cpp.o -c "/mnt/e/Project/Advance programming/Final_project/compression/LZW/Text.cpp"
+
+CMakeFiles/LZW.dir/Text.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LZW.dir/Text.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/e/Project/Advance programming/Final_project/compression/LZW/Text.cpp" > CMakeFiles/LZW.dir/Text.cpp.i
+
+CMakeFiles/LZW.dir/Text.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LZW.dir/Text.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/e/Project/Advance programming/Final_project/compression/LZW/Text.cpp" -o CMakeFiles/LZW.dir/Text.cpp.s
+
+CMakeFiles/LZW.dir/Video.cpp.o: CMakeFiles/LZW.dir/flags.make
+CMakeFiles/LZW.dir/Video.cpp.o: ../Video.cpp
+CMakeFiles/LZW.dir/Video.cpp.o: CMakeFiles/LZW.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/mnt/e/Project/Advance programming/Final_project/compression/LZW/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/LZW.dir/Video.cpp.o"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/LZW.dir/Video.cpp.o -MF CMakeFiles/LZW.dir/Video.cpp.o.d -o CMakeFiles/LZW.dir/Video.cpp.o -c "/mnt/e/Project/Advance programming/Final_project/compression/LZW/Video.cpp"
+
+CMakeFiles/LZW.dir/Video.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/LZW.dir/Video.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/mnt/e/Project/Advance programming/Final_project/compression/LZW/Video.cpp" > CMakeFiles/LZW.dir/Video.cpp.i
+
+CMakeFiles/LZW.dir/Video.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/LZW.dir/Video.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/mnt/e/Project/Advance programming/Final_project/compression/LZW/Video.cpp" -o CMakeFiles/LZW.dir/Video.cpp.s
+
 # Object files for target LZW
 LZW_OBJECTS = \
-"CMakeFiles/LZW.dir/main.cpp.o"
+"CMakeFiles/LZW.dir/main.cpp.o" \
+"CMakeFiles/LZW.dir/GIF.cpp.o" \
+"CMakeFiles/LZW.dir/Text.cpp.o" \
+"CMakeFiles/LZW.dir/Video.cpp.o"
 
 # External object files for target LZW
 LZW_EXTERNAL_OBJECTS =
 
 LZW: CMakeFiles/LZW.dir/main.cpp.o
+LZW: CMakeFiles/LZW.dir/GIF.cpp.o
+LZW: CMakeFiles/LZW.dir/Text.cpp.o
+LZW: CMakeFiles/LZW.dir/Video.cpp.o
 LZW: CMakeFiles/LZW.dir/build.make
 LZW: CMakeFiles/LZW.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/mnt/e/Project/Advance programming/Final_project/compression/LZW/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable LZW"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/mnt/e/Project/Advance programming/Final_project/compression/LZW/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable LZW"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/LZW.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -8,6 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/mnt/e/Project/Advance programming/Final_project/compression/LZW/GIF.cpp" "CMakeFiles/LZW.dir/GIF.cpp.o" "gcc" "CMakeFiles/LZW.dir/GIF.cpp.o.d"
+  "/mnt/e/Project/Advance programming/Final_project/compression/LZW/Text.cpp" "CMakeFiles/LZW.dir/Text.cpp.o" "gcc" "CMakeFiles/LZW.dir/Text.cpp.o.d"
+  "/mnt/e/Project/Advance programming/Final_project/compression/LZW/Video.cpp" "CMakeFiles/LZW.dir/Video.cpp.o" "gcc" "CMakeFiles/LZW.dir/Video.cpp.o.d"
   "/mnt/e/Project/Advance programming/Final_project/compression/LZW/main.cpp" "CMakeFiles/LZW.dir/main.cpp.o" "gcc" "CMakeFiles/LZW.dir/main.cpp.o.d"
   )
 

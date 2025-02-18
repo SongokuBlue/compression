@@ -129,6 +129,78 @@ LZW/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/LZW.dir/build.make CMakeFiles/LZW.dir/build
 .PHONY : LZW/fast
 
+GIF.o: GIF.cpp.o
+.PHONY : GIF.o
+
+# target to build an object file
+GIF.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LZW.dir/build.make CMakeFiles/LZW.dir/GIF.cpp.o
+.PHONY : GIF.cpp.o
+
+GIF.i: GIF.cpp.i
+.PHONY : GIF.i
+
+# target to preprocess a source file
+GIF.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LZW.dir/build.make CMakeFiles/LZW.dir/GIF.cpp.i
+.PHONY : GIF.cpp.i
+
+GIF.s: GIF.cpp.s
+.PHONY : GIF.s
+
+# target to generate assembly for a file
+GIF.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LZW.dir/build.make CMakeFiles/LZW.dir/GIF.cpp.s
+.PHONY : GIF.cpp.s
+
+Text.o: Text.cpp.o
+.PHONY : Text.o
+
+# target to build an object file
+Text.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LZW.dir/build.make CMakeFiles/LZW.dir/Text.cpp.o
+.PHONY : Text.cpp.o
+
+Text.i: Text.cpp.i
+.PHONY : Text.i
+
+# target to preprocess a source file
+Text.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LZW.dir/build.make CMakeFiles/LZW.dir/Text.cpp.i
+.PHONY : Text.cpp.i
+
+Text.s: Text.cpp.s
+.PHONY : Text.s
+
+# target to generate assembly for a file
+Text.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LZW.dir/build.make CMakeFiles/LZW.dir/Text.cpp.s
+.PHONY : Text.cpp.s
+
+Video.o: Video.cpp.o
+.PHONY : Video.o
+
+# target to build an object file
+Video.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LZW.dir/build.make CMakeFiles/LZW.dir/Video.cpp.o
+.PHONY : Video.cpp.o
+
+Video.i: Video.cpp.i
+.PHONY : Video.i
+
+# target to preprocess a source file
+Video.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LZW.dir/build.make CMakeFiles/LZW.dir/Video.cpp.i
+.PHONY : Video.cpp.i
+
+Video.s: Video.cpp.s
+.PHONY : Video.s
+
+# target to generate assembly for a file
+Video.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/LZW.dir/build.make CMakeFiles/LZW.dir/Video.cpp.s
+.PHONY : Video.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -162,6 +234,15 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... LZW"
+	@echo "... GIF.o"
+	@echo "... GIF.i"
+	@echo "... GIF.s"
+	@echo "... Text.o"
+	@echo "... Text.i"
+	@echo "... Text.s"
+	@echo "... Video.o"
+	@echo "... Video.i"
+	@echo "... Video.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

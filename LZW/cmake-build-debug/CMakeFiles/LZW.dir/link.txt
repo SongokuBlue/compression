@@ -1,1 +1,1 @@
-/usr/bin/g++ -g CMakeFiles/LZW.dir/main.cpp.o -o LZW 
+/usr/bin/g++ -g CMakeFiles/LZW.dir/main.cpp.o CMakeFiles/LZW.dir/GIF.cpp.o CMakeFiles/LZW.dir/Text.cpp.o CMakeFiles/LZW.dir/Video.cpp.o -o LZW 

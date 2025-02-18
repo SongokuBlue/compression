@@ -1,236 +1,149 @@
 #include <bits/stdc++.h>
 #include "stdio.h"
 #include "set"
+#include "GIF.h"
+#include "Text.h"
+#include "Video.h"
 using namespace std;
-void initialize_compress_Dictionary(unordered_map<string, int>& table) {
-    table.clear();
-    for (int i = 0; i <= 255; i++) {
-        string ch = "";
-        ch = char(i); // Tạo string từ ký tự ASCII
-        table[ch] = i; // Gán string với giá trị ASCII tương ứng
+
+
+
+std::string insertDecompressed(const std::string& filename) {
+    std::string extensions[] = {".txt", ".mp4", ".gif"};
+
+    // if "_compressed" exists, remove it
+    std::string cleanFilename = filename;
+    size_t compressedPos = cleanFilename.rfind("_compressed");
+    if (compressedPos != std::string::npos) {
+        cleanFilename.erase(compressedPos, 11); // Xóa "_compressed"
+    }
+
+    for (const auto& ext : extensions) {
+        size_t pos = cleanFilename.rfind(ext);
+        if (pos != std::string::npos) {
+            return cleanFilename.substr(0, pos) + "_decompressed" + ext;
+        }
+    }
+    return cleanFilename; // If there is no valid extension, returns the sanitized filename
+}
+
+void compressFolder(const std::string& inputFolder, const std::string& outputFolder) {
+    std::filesystem::create_directories(outputFolder);
+    for (const auto &entry : std::filesystem::directory_iterator(inputFolder)) {
+        if(entry.is_regular_file() && entry.path().extension() == ".txt") { // checking if file inside whether it is text or not
+            std::string inputFile = entry.path().string();
+            std::string outputFile = outputFolder + "/" + entry.path().filename().string() + "_compressed";
+            Text text;
+            text.readTEXT(inputFile);
+            string textData = text.get_textData();
+            text.readTextAndCompress(textData,outputFile);
+            std::cout << "Compressed: " << inputFile << " -> " << outputFile << std::endl;
+        }else { // if not file text, not compress, just copy into a compress folder
+            std::string output_non_textFile = outputFolder + "/" + entry.path().filename().string();
+            std::filesystem::copy(entry, output_non_textFile, std::filesystem::copy_options::overwrite_existing);
+
+        }
     }
 }
 
-void initialize_decompress_Dictionary(unordered_map<int, string>& table) {
-    table.clear();
-    for (int i = 0; i <= 255; i++) {
-        string ch = "";
-        ch = char(i); //create string from ASCII character
-        table[i] = ch; // assign string to dictionary with corresponding ASCII
-    }
-}
-int calculate_bits(int code) {
-    // Tính số bit cần thiết để biểu diễn một mã
-    return (code == 0) ? 1 : (int)log2(code + 1) + 1;
-}
-
-void writeBitsToFile(const vector<int>& compressed_gifData, const string& filename) {
-    ofstream outputFile(filename, ios::binary);
-    if (!outputFile.is_open()) {
-        cerr << "Opening file " << filename << " failed!" << endl;
-        exit(EXIT_FAILURE);
+void decompressFolder(const std::string& inputFolder, const std::string& outputFolder) {
+    std::filesystem::create_directories(outputFolder);
+    for (const auto &entry : std::filesystem::directory_iterator(inputFolder)) {
+        std::string fileName = entry.path().filename().string();
+        if(entry.is_regular_file() && fileName.find("_compressed") != std::string::npos) {
+            std::string inputFile = entry.path().string();
+            std::string outputFile = outputFolder + "/" + insertDecompressed(entry.path().filename().string());
+            Text text;
+            text.readTextAndDecompress(inputFile,outputFile);
+            std::cout << "Decompressed: " << inputFile << " -> " << outputFile << std::endl;
+        }else {
+            std::string output_non_textFile = outputFolder + "/" + entry.path().filename().string();;
+            std::filesystem::copy(entry, output_non_textFile, std::filesystem::copy_options::overwrite_existing);
+        }
     }
 
-    bitset<32> bitBuffer; // Dùng bitset để lưu trữ bit của các số.
-    int bitPosition = 0;
+}
 
-    for (int code : compressed_gifData) {
-        int bitCount = calculate_bits(code);  // Tính số bit của từng mã
-        for (int i = bitCount - 1; i >= 0; --i) {
-            bitBuffer[bitPosition] = (code >> i) & 1; // Gán từng bit vào buffer
-            bitPosition++;
-            if (bitPosition == 8) {  // Nếu buffer đầy 8 bit, ghi vào file
-                outputFile.put(bitBuffer.to_ulong());  // Ghi byte hiện tại vào file
-                bitBuffer.reset();  // Reset lại buffer
-                bitPosition = 0;
+
+int main(int argc, char* argv[])
+{
+
+    if(argc < 2) {
+        std::cout << "Not enough file for compression";
+        return 1;
+    }
+
+    for(int i = 1; i < argc; ++i) {
+        std::string file_name = argv[i];
+        std::filesystem::path inputPath(file_name);
+
+        if(std::filesystem::is_directory(inputPath)) {
+            if(file_name.find("_compressed") != std::string::npos) {
+                size_t compressedPos = file_name.rfind("_compressed");
+                std::filesystem::path decompressed_folder = inputPath.parent_path().parent_path() / ((inputPath.parent_path().filename().string().erase(compressedPos, 11) + "_decompressed"));
+                decompressFolder(file_name, decompressed_folder);
+                std::cout << "Folder " << file_name << "decompressed to: " << file_name + "_decompressed" << std::endl;
+            }else {
+                std::filesystem::path compressed_folder = inputPath.parent_path().parent_path()  /  (inputPath.parent_path().filename().string() + "_compressed");
+                compressFolder(file_name, compressed_folder);
+                std::cout << "Folder " << file_name << "compressed to: " << file_name + "_compressed" << std::endl;
             }
+
+            continue;
         }
-    }
+        if (file_name.ends_with(".txt")) {
+            Text text;
+            string Compressed_text = file_name + "_compressed";
+            string Decompressed_text = insertDecompressed(file_name);
+            text.readTEXT(file_name);
+            string textData = text.get_textData();
+            std::cout << "Encoding\n";
+            text.readTextAndCompress(textData, Compressed_text);
+            std::cout << "Decoding\n";
+            text.readTextAndDecompress(Compressed_text,Decompressed_text);
+            std::cout << "Decompress successfully\n";
 
-    // Ghi lại phần còn lại nếu có (nếu bitPosition > 0 thì có một byte chưa đầy)
-    if (bitPosition > 0) {
-        outputFile.put(bitBuffer.to_ulong());
-    }
-
-    outputFile.close();
-    cout << "Data written to file successfully with minimal bit size." << endl;
-}
-vector<int> encoding(const vector<unsigned char>& s1)
-{
-    cout << "Encoding\n";
-    unordered_map<string, int> table;
-    initialize_compress_Dictionary(table);
-
-    string p = "", c = ""; // p: current string, c: is a next character
-    p += s1[0];  // initialize the first string by plus with first character
-    int code = 256; // code number (after maximum ASCII number)
-    vector<int> output_code; // vector which stored output
-//    cout << "String\tOutput_Code\tAddition\n";
-    // Iterating each character through string
-    for (int i = 0; i < s1.size(); i++) {
-        if (i != s1.size() - 1) // if still not reaching the last character
-            c = s1[i + 1]; // move to the next character
-        // if p+c already exist in dictionary, make p+c be a current pattern
-        if (table.find(p + c) != table.end()) {
-            p = p + c;
-        }
-            // if p+c is currently not exist in dictionary, adding a current pattern (p)
-        else {
-//            cout << p << "\t" << table[p] << "\t\t"   command this code
-//                 << p + c << "\t" << code << endl;
-            output_code.push_back(table[p]);
-            table[p + c] = code; // adding p+c pattern with corresponding code number to dictionary
-            code++; // increase code number by 1
-            if(code >= 4096) {
-                initialize_compress_Dictionary(table); // reset dictionary
-                code = 256;
+        }else if (file_name.ends_with(".mp4")) {
+            Video video;
+            string Compressed_video = file_name + "_compressed";
+            string Decompressed_video = insertDecompressed(file_name);
+            video.readVideo(file_name);
+            vector<unsigned char> videoData = video.get_videoData();
+            vector<uint8_t> bitCounts;
+            video.readVideoAndCompress(videoData,Compressed_video, bitCounts);
+            vector<int> compressed_videoData = video.get_compressed_videoData();
+            // converting uneven bits to integer require "bitCount" vector, which only achieved by reading original file
+            // and using calculate bits function
+            vector<int> converting_vector = video.convert_bit_to_int(Compressed_video, bitCounts);
+            if (converting_vector == compressed_videoData) cout<< "Converting bit data to int data successfully";
+            video.readVideoAndDecompress(converting_vector, Decompressed_video);
+            vector<unsigned char> decompressed_videoData = video.get_decompressed_videoData();
+            if(decompressed_videoData == videoData) { // check if these vector have the same data and element
+                cout<<"decompress successfully" << "\n";
             }
-            p = c; // setting current pattern be c
+        }else if (file_name.ends_with(".gif")) {
+            Gif gif;
+            string Compressed_gif = file_name + "_compressed";
+            string Decompressed_gif = insertDecompressed(file_name);
+            gif.readGIF(file_name);
+            vector<unsigned char> gifData = gif.get_gifData();
+            vector<uint8_t> bitCounts;
+            gif.readGIFAndCompress(gifData,Compressed_gif, bitCounts);
+            vector<int> compressed_gifData = gif.get_compressed_gifData();
+            vector<int> converting_vector = gif.convert_bit_to_int(Compressed_gif, bitCounts);
+            if (converting_vector == compressed_gifData) cout<< "Converting bit data to int data successfully";
+            gif.readGIFAndDecompress(converting_vector, Decompressed_gif);
+            vector<unsigned char> decompressed_gifData = gif.get_decompressed_gifData();
+            if(decompressed_gifData == gifData) { // check if these vector have the same data and element
+                cout<<"decompress successfully" << "\n";
+            }
+        }else {
+            std::cerr << "Undefined file \n";
+            return 1;
         }
-        c = ""; // reset c before checking the next character
-    }
-//    cout << p << "\t" << table[p] << endl; command this line
-    output_code.push_back(table[p]); // push the last pattern to output
-    return output_code;
-}
-
-vector<unsigned char> decoding(vector<int> op)
-{
-    cout << "\nDecoding\n";
-    unordered_map<int, string> table;
-    //initialize dictionary with ASCII (0-255)
-    initialize_decompress_Dictionary(table);
-
-    vector<unsigned char> decompressedData;
-    int old = op[0]; // get the first code number in encode output
-    string s = table[old]; // searching dictionary to get first string (always start with character)
-    string c ;
-    c = s[0]; // c is a first character of a current pattern
-//    cout << s;
-    int count = 256; // new code number start with 256
-
-    for (char ch : s) {
-        decompressedData.push_back(ch); // Add first decoded string to result
-    }
-    // Iterating each code number in encode output
-    for (int i = 0; i < op.size() - 1; i++) {
-        int n = op[i + 1]; // next number in output
-        // if current code number does not exist in dict
-        if (table.find(n) == table.end()) {
-            s = table[old]; // get string from previous code number
-            s = s + c; // and plus with first character to create a new pattern
-        }
-        else { // if code number already exist
-            s = table[n]; // getting a current string
-        }
-
-        for (char ch : s) {
-            decompressedData.push_back(ch); // Add decoded string to result
-        }
-        c = ""; // reset c before set it to be a first character in a next pattern
-        c += s[0]; // get the first character of current pattern
-        table[count] = table[old] + c; // adding new string to dictionary
-        count++; // increase code number by 1
-        if (count >= 4096) {
-            initialize_decompress_Dictionary(table);
-            count = 256;
-        }
-        old = n; // update old to become previous code number
-    }
-    return decompressedData;
-}
-
-
-vector<unsigned char> readGIF(const string& inputFilename) {
-    ifstream inputFile(inputFilename, ios::binary);
-    if (!inputFile.is_open()) {
-        cerr << "Opening file " << inputFilename << " failed" << endl;
-        exit(EXIT_FAILURE);
-    }
-
-    // Đọc dữ liệu từ file GIF
-    vector<unsigned char> gifData((istreambuf_iterator<char>(inputFile)), istreambuf_iterator<char>());
-    inputFile.close();
-
-    return gifData; // Trả về dữ liệu đã đọc
-}
-
-void Write_uncompress_data(const vector<unsigned char>& gifData, const string& outputFilename) {
-    ofstream outputFile(outputFilename, ios::binary);
-    if (!outputFile.is_open()) {
-        cerr << "Opening " << outputFilename << "failed" << endl;
-        exit(EXIT_FAILURE);
     }
 
 
-    for (unsigned char ch: gifData ) {
-        outputFile.write(reinterpret_cast<char*>(&ch), sizeof(ch));
-    }
-
-    outputFile.close();
-    cout << "Writing uncompress data to " << outputFilename << " Successfully";
-}
-vector<int> readGIFAndCompress (const vector<unsigned char>& gifData, const string& outputFilename) {
-    vector<int> compressed_gifData = encoding(gifData);
-    ofstream outputFile(outputFilename, ios::binary);
-    if(!outputFile.is_open()) {
-        cerr << "Opening file " << outputFilename << "failed" << endl;
-        exit(EXIT_FAILURE);
-    }
-
-    for (int code : compressed_gifData) {
-        outputFile << code; // Ghi từng mã dưới dạng nhị phân
-    }
-    outputFile.close();
-    return compressed_gifData;
-}
-
-vector<unsigned char> readGIFAndDecompress(const vector<int> compressed_gifData, const string& outputFilename) {
-    vector<unsigned char> decompressed_gifData = decoding(compressed_gifData);
-    ofstream outputFile(outputFilename, ios::binary);
-    if (!outputFile.is_open()) {
-        cerr << "Opening file " << outputFilename << " failed" << endl;
-        exit(EXIT_FAILURE);
-    }
-
-    outputFile.write(reinterpret_cast<const char*>(decompressed_gifData.data()), decompressed_gifData.size());
-    outputFile.close();
-
-    cout << "Decompressed GIF written to " << outputFilename << " successfully." << endl;
-    return decompressed_gifData;
-}
-
-int main()
-{
-
-//    string s = "WYS*WYGWYS*WYSWYSG";
-//    vector<int> output_code = encoding(s);
-//    cout << "Output Codes are: ";
-//    for (int i = 0; i < output_code.size(); i++) {
-//        cout << output_code[i] << " ";
-//    }
-//    cout << endl;
-//    decoding(output_code);
-//    string outputFilename = "Output.txt";     // Tên file để ghi dữ liệu
-//
-//    readGIFAndWrite(inputFilename, outputFilename);
-    string inputFilename = "Simpson.gif";
-    vector<unsigned char> gifData = readGIF(inputFilename);
-    string output = "Simpson_data_info.txt";
-    Write_uncompress_data(gifData, output);
-    string compress_file = "Compress_step1.txt";
-    vector<int> compressed_gifData = readGIFAndCompress(gifData, compress_file);
-    string decompress_file = "Decompress.txt";
-    vector<unsigned char> decompressed_gifData = readGIFAndDecompress(compressed_gifData, decompress_file);
-    string final_file = "Compress_step2.txt";
-    writeBitsToFile(compressed_gifData,final_file);
-
-    cout << "Original size (number of codes): " << gifData.size() << "\n";
-    cout << "Original size:" << gifData.size() * sizeof(unsigned char) << "\n";
-    cout << "Compressed size (number of codes): " << compressed_gifData.size() << "\n";
-    cout << "Compressed file size: " << compressed_gifData.size() * sizeof(int) << " bytes\n";
-    cout << "Decompress file size (number of codes): " << decompressed_gifData.size() << "\n";
-    cout << "Decompress file size " << decompressed_gifData.size() * sizeof(unsigned char) << "\n";
     return 0;
 
 }
